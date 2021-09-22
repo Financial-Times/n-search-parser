@@ -1,6 +1,6 @@
 # n-search-parser
 
-[![CircleCI](https://img.shields.io/circleci/project/github/Financial-Times/n-search-parser/master.svg)](https://circleci.com/gh/Financial-Times/n-search-parser) [![NPM version](https://img.shields.io/npm/v/@financial-times/n-search-parser.svg)](https://www.npmjs.com/package/@financial-times/n-search-parser)
+[![CircleCI](https://img.shields.io/circleci/project/github/Financial-Times/n-search-parser/main.svg)](https://circleci.com/gh/Financial-Times/n-search-parser) [![NPM version](https://img.shields.io/npm/v/@financial-times/n-search-parser.svg)](https://www.npmjs.com/package/@financial-times/n-search-parser)
 
 This parser is not that smart, but that's OK. You don't need to know about [parsing expression grammar][1] (and subsequently [the tools][2] surrounding it) or anything like that. It's written in sane JavaScript, is very fast, and consists of a tokenizer and an expression tree builder.
 
@@ -21,7 +21,7 @@ $ npm i -S @financial-times/n-search-parser
 First include the module in your code:
 
 ```js
-const parser = require('@financial-times/n-search-parser');
+const parser = require("@financial-times/n-search-parser");
 ```
 
 This module will export three methods...
