@@ -9,19 +9,30 @@
   },
   "homepage": "https://github.com/Financial-Times/n-search-parser",
   "devDependencies": {
-    "@financial-times/n-gage": "^5.0.0",
+    "@financial-times/n-gage": "^8.3.2",
     "chai": "^4.1.0",
     "mocha": "^5.2.0",
     "snyk": "^1.168.0"
   },
-  "engines": {
-    "node": ">=8.0.0"
-  },
   "scripts": {
-    "precommit": "node_modules/.bin/secret-squirrel",
-    "commitmsg": "node_modules/.bin/secret-squirrel-commitmsg",
-    "prepush": "make verify -j3",
-    "prepare": "npx snyk protect || npx snyk protect -d || true"
+    "test": "make test",
+    "prepare": "npx snyk protect || npx snyk protect -d || true",
+    "preinstall": "[ \"$INIT_CWD\" != \"$PWD\" ] || npm_config_yes=true npx check-engine"
+  },
+  "engines": {
+    "node": "12.x",
+    "npm": "7.x"
+  },
+  "volta": {
+    "node": "12.22.9",
+    "npm": "7.24.2"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "node_modules/.bin/secret-squirrel-commitmsg",
+      "pre-commit": "node_modules/.bin/secret-squirrel",
+      "pre-push": "make test && make verify -j3"
+    }
   },
   "bin": {
     "n-search-parser": "bin/parser"
