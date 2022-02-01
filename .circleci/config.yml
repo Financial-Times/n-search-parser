@@ -2,15 +2,10 @@
 # template: component
 
 references:
-  container_config_node8: &container_config_node8
+  container_config_node: &container_config_node
     working_directory: ~/project/build
     docker:
-      - image: circleci/node:8-browsers
-
-  container_config_lambda_node8: &container_config_lambda_node8
-    working_directory: ~/project/build
-    docker:
-      - image: lambci/lambda:build-nodejs8.10
+      - image: circleci/node:12-browsers
 
   workspace_root: &workspace_root ~/project
 
@@ -20,13 +15,13 @@ references:
 
   npm_cache_keys: &npm_cache_keys
     keys:
-      - v2-dependency-npm-{{ checksum "package.json" }}-
-      - v2-dependency-npm-{{ checksum "package.json" }}
-      - v2-dependency-npm-
+      - v3-dependency-npm-{{ checksum "package-lock.json" }}-
+      - v3-dependency-npm-{{ checksum "package-lock.json" }}
+      - v3-dependency-npm-
 
   cache_npm_cache: &cache_npm_cache
     save_cache:
-      key: v2-dependency-npm-{{ checksum "package.json" }}-{{ epoch }}
+      key: v3-dependency-npm-{{ checksum "package-lock.json" }}-{{ epoch }}
       paths:
         - ./node_modules/
 
@@ -53,26 +48,25 @@ references:
     branches:
       ignore: /.*/
 
-version: 2
+version: 2.1
+
+orbs:
+  node: circleci/node@4.6.0
 
 jobs:
   build:
-    <<: *container_config_node8
+    <<: *container_config_node
     steps:
       - checkout
       - run:
           name: Checkout next-ci-shared-helpers
           command: git clone --depth 1 git@github.com:Financial-Times/next-ci-shared-helpers.git .circleci/shared-helpers
       - *restore_npm_cache
+      - node/install-npm:
+          version: "7"
       - run:
           name: Install project dependencies
           command: make install
-      - run:
-          name: shared-helper / npm-install-peer-deps
-          command: .circleci/shared-helpers/helper-npm-install-peer-deps
-      - run:
-          name: shared-helper / npm-update
-          command: .circleci/shared-helpers/helper-npm-update
       - run:
           name: Run the project build task
           command: make build
@@ -90,7 +84,7 @@ jobs:
             - build
 
   test:
-    <<: *container_config_node8
+    <<: *container_config_node
     steps:
       - *attach_workspace
       - run:
@@ -106,7 +100,7 @@ jobs:
           destination: test-results
 
   publish:
-    <<: *container_config_node8
+    <<: *container_config_node
     steps:
       - *attach_workspace
       - run:
