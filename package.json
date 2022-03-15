@@ -11,7 +11,7 @@
   "devDependencies": {
     "@financial-times/n-gage": "^8.3.2",
     "chai": "^4.1.0",
-    "mocha": "^5.2.0",
+    "mocha": "^6.0.0",
     "snyk": "^1.168.0"
   },
   "scripts": {
