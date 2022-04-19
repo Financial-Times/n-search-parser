@@ -20,11 +20,11 @@
     "preinstall": "[ \"$INIT_CWD\" != \"$PWD\" ] || npm_config_yes=true npx check-engine"
   },
   "engines": {
-    "node": "12.x",
+    "node": "14.x || 16.x",
     "npm": "7.x"
   },
   "volta": {
-    "node": "12.22.9",
+    "node": "16.14.2",
     "npm": "7.24.2"
   },
   "husky": {
