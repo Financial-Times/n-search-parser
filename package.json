@@ -20,7 +20,7 @@
     "preinstall": "[ \"$INIT_CWD\" != \"$PWD\" ] || npm_config_yes=true npx check-engine"
   },
   "engines": {
-    "node": "16.x",
+    "node": "18.x",
     "npm": "7.x || 8.x || 9.x"
   },
   "volta": {
