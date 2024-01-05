@@ -55,7 +55,7 @@ references:
 version: 2.1
 
 orbs:
-  node: circleci/node@4.6.0
+  node: circleci/node@5.2.0
 
 jobs:
   build:
