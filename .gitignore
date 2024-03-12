@@ -1,8 +1,8 @@
 /node*
 *.env*
-.eslintrc.js
 .editorconfig
 /.idea
 /coverage
 /.nyc_output/
 test-results.xml
+/.toolkitstate

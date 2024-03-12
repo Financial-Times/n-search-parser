@@ -9,16 +9,21 @@
   },
   "homepage": "https://github.com/Financial-Times/n-search-parser",
   "devDependencies": {
-    "@financial-times/n-gage": "^8.3.2",
+    "@dotcom-tool-kit/component": "^4.1.3",
+    "@dotcom-tool-kit/eslint": "^3.2.0",
+    "@dotcom-tool-kit/lint-staged-npm": "^3.2.0",
+    "@dotcom-tool-kit/mocha": "^3.2.0",
+    "@financial-times/eslint-config-next": "^7.1.0",
     "chai": "^4.1.0",
+    "dotcom-tool-kit": "^3.4.5",
     "mocha": "^10.2.0",
-    "mocha-junit-reporter": "^2.2.1",
-    "mocha-multi-reporters": "^1.5.1",
     "snyk": "^1.168.0"
   },
   "scripts": {
-    "test": "make test",
-    "prepare": "npx snyk protect || npx snyk protect -d || true"
+    "test": "dotcom-tool-kit test:local",
+    "prepare": "npx snyk protect || npx snyk protect -d || true",
+    "build": "dotcom-tool-kit build:local",
+    "start": "dotcom-tool-kit run:local"
   },
   "engines": {
     "node": "16.x || 18.x",
@@ -29,12 +34,14 @@
   },
   "husky": {
     "hooks": {
-      "commit-msg": "node_modules/.bin/secret-squirrel-commitmsg",
-      "pre-commit": "node_modules/.bin/secret-squirrel",
-      "pre-push": "make test && make verify -j3"
+      "commit-msg": "dotcom-tool-kit git:commitmsg",
+      "pre-commit": "dotcom-tool-kit git:precommit"
     }
   },
   "bin": {
     "n-search-parser": "bin/parser"
+  },
+  "lint-staged": {
+    "**/*.js": "dotcom-tool-kit format:staged test:staged --"
   }
 }
