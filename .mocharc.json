@@ -1,10 +1,4 @@
 {
-  "reporter": "mocha-multi-reporters",
   "recursive": true,
-  "exit": true,
-  "reporterEnabled": "mocha-junit-reporter, spec",
-  "reporterOptions": "configFile=.mocharc.json",
-  "mochaJunitReporterReporterOptions": {
-    "mochaFile": "./test-results.xml"
-  }
+  "exit": true
 }
